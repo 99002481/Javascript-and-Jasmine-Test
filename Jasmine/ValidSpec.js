@@ -1,7 +1,7 @@
 describe("Suite to test Billing Validation", () => {
     biller  = null;
     beforeEach(() => {
-		let date = new Date(2020, 8, 28);
+		let date = new Date(2010, 10, 10);
         biller = new biller("Anubhav Reddy S", "anubhavreddy.s.2@gmail.com", "9964247999", date, 5000);
     });
 
