@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Form Validation</title>
+    <script src="CommonFunctions.js"></script>  
+    <style>
+        body{
+            background-color:darkgray
+        }
+        h1{
+          text-align: center; 
+        }
+
+        form{
+            width : 350px;
+            padding : 15px;
+            border : 2px solid navy;
+            margin: 50px auto 0;
+            border-radius: 5px; 
+            background-color: antiquewhite; 
+        }
+
+        label{
+            display:block;
+            margin-bottom: 5px;
+        }
+
+        input, select{
+            border:1px solid mediumseagreen;
+            padding:10px;
+            display:block;
+            width:95%;
+            border-radius: 2px;
+        }
+        
+        .row{
+            padding-bottom: 15px;
+        }
+        .err{
+            font-size:0.9em;
+            color :red;
+        }
+        button{
+            display:block;
+            width:95%;
+            height: 50px;
+            border-color:red;
+            background-color:yellowgreen;
+            margin-top: 15px;
+        }
+    </style>
+    <script>
+        function showErr(ele, msg){
+            $get(ele).innerText = msg;
+        }
+        function validate(){
+            let name = document.Registration.name.value;
+            let email = document.Registration.email.value;
+            let mobile = document.Registration.phone.value;
+            let gender = document.Registration.gender.value;
+            let BDate = document.Registration.BillingDate.value;
+            let BAmount = document.Registration.BillingAmount.value;
+          
+            if(name == "" || name == null){
+                showErr("errName", "Name is mandatory")
+                return false;
+            }else{
+                showErr("errName", "")
+            }
+            
+            if(email == ""){
+                showErr("errEmail", "Email is mandatory")
+                return false;
+            }else{
+                showErr("errEmail", "")
+            }
+            let regEx = new RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$");
+            if(regEx.test(email) == false){
+                showErr("errEmail", "Email is not in a valid format")
+                return false;
+            } else {
+                showErr("errEmail", "")
+            }
+            
+            if(mobile == "" || mobile == null){
+            showErr("errMobile", "Phone number is mandatory!!!")
+            return false;
+            }
+            else
+            {
+            showErr("errMobile", "")
+            }
+            regEx = new RegExp("(0/91)?[7-9][0-9]{9}");
+            if(!(regEx.test(mobile))){
+            showErr("errMobile", "Mobile number is not in a valid format!!!")
+            return false;
+            } else 
+            {
+            showErr("errMobile", "")
+            }
+
+            if(gender == "")
+                return false;    
+            return true;
+
+            if(BDate == "" || BDate == null){
+            showErr("errBDate", "Billing Date is mandatory!!!")
+            return false;
+            }
+
+            if(BAmount == "" || BAmount == null){
+            showErr("errBAmount", "Billing Amount is mandatory!!!")
+            return false;
+            }
+            else
+            {
+            showErr("errBAmount", "")
+            }
+            regEx = new RegExp("^[0-9]");
+            if(!(regEx.test(BAmount))){
+            showErr("errBAmount", "Billing Amount is not in a valid format!!!")
+            return false;
+            } else 
+            {
+            showErr("errBAmount", "")
+            }
+
+        }
+    </script>
+    <script>
+        function testVariable() {
+            debugger
+            var strText = document.getElementById("BillingAmount").value;
+            var strText1 = document.getElementById("BillingDate").value;
+            document.getElementById("p1").innerHTML = strText;
+            document.getElementById("p2").innerHTML = strText1;
+
+        }
+    </script>
+</head>
+<body>
+    <form action="" name="Registration" novalidate="true" onsubmit="return validate()">
+        <h1>Customer Bill Registration Form</h1>
+        <div class="row">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" id="name"/>
+            <div id="errName" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" />
+            <div id="errEmail" class="err"></div>
+        </div>
+        <div class="row">
+            <label for="phone">Mobile phone</label>
+            <input type="text" id="phone" name="phone" />
+            <div id="errMobile" class="err"></div>
+        </div>
+        </div>
+        <div class="row">
+            Gender
+            <p>
+            <input  type="radio" name="gender" />Male
+            <input  type="radio" name="gender" />Female
+            </p>
+        </div>
+
+        <div class="row">
+            <label for="BillingDate">Billing Date</label>
+            <input type="date" id="BillingDate" name="BillingDate" />
+            <div id="errBDate" class="err"></div>
+        </div>
+
+        <div class="row">
+            <label for="BillingAmount">Billing Amount</label>
+            <input type="number" id="BillingAmount" name="BillingAmount" />
+            <div id="errBAmount" class="err"></div>
+        </div>
+        <button>Register</button>
+        <br>
+        <input type="button" value="Submit" onclick="testVariable()">
+    </form>
+    <form action="" class="a">
+    <div>
+        <h2>Billing Details</h2>
+        Billing Amount: <p id="p1"></p><br>
+        Billing Date:<p id="p2"></p>
+    </pre>
+    </div>
+</form>
+    
+</body>
+</html>
